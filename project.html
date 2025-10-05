@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: slideInDown 1s ease-out;
+        }
+
+        h1 {
+            color: #4a4a4a;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            color: #5a5a5a;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .project-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-table {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            border-collapse: collapse;
+        }
+
+        .team-table th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .team-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .team-table tr:hover {
+            background-color: #f8f9ff;
+        }
+
+        .team-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            transition: transform 0.2s ease;
+        }
+
+        .feature-list li:hover {
+            transform: translateX(5px);
+        }
+
+        .feature-list li:before {
+            content: "✅ ";
+            margin-right: 0.5rem;
+            color: #667eea;
+        }
+
+        .navigation {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .nav-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .tech-item {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 65%;
+            animation: progressFill 2s ease-in-out;
+            border-radius: 5px;
+        }
+
+        @keyframes progressFill {
+            from { width: 0%; }
+            to { width: 65%; }
+        }
+
+        .floating-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .project-description {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-description p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .project-highlights {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-button {
+                display: block;
+                margin: 0.5rem 0;
+            }
+            
+            .team-table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating background elements -->
+    <div class="floating-elements" id="floatingElements"></div>
+
+    <div class="container">
+        <header>
+            <h1>Vendorlution</h1>
+            <p><strong>E-commerce Website:</strong> A platform where users can buy and sell products easily and securely.</p>
+            <div class="tech-stack">
+                <span class="tech-item">REACT</span>
+                <span class="tech-item">HTML5</span>
+                <span class="tech-item">CSS3</span>
+                <span class="tech-item">JavaScript</span>
+                <span class="tech-item">MySQL</span>
+            </div>
+        </header>
+
+        <div class="project-description">
+            <h2>🎯 Project Overview</h2>
+            <p>
+                Our proposed project is an <em>e-commerce website</em> that empowers local and global users 
+                by providing a platform to <strong>sell</strong> and <strong>buy products</strong>. 
+                The website will ensure trust between buyers and sellers by incorporating 
+                modern design, user-friendly features, and secure transactions.
+            </p>
+
+        </div>
+
+        <div class="project-highlights">
+            <div class="highlight-card">
+                <h2>🚀 Core Features</h2>
+                <ul class="feature-list">
+                    <li>User-friendly interface for buyers and sellers</li>
+                    <li>Secure user registration and login</li>
+                    <li>Product listing with images and descriptions</li>
+                    <li>Shopping cart and checkout system</li>
+                    <li>Integrated online payment gateway</li>
+                    <li>Order tracking and management</li>
+                    <li>Review and rating system for sellers and products</li>
+                </ul>
+            </div>
+
+            <div class="highlight-card">
+                <h2>📊 Development Progress</h2>
+                <p>Current Completion: 80%</p>
+                <div class="progress-bar">
+                    <div class="progress"></div>        
+                </div>
+              <p><strong>Expected Launch:</strong> OCT 2025</p>
+                <p><strong>Current Phase:</strong> Backend API Development</p>
+                <p><strong>Next Milestone:</strong> User Testing & Feedback</p>
+            </div>
+
+            <div class="highlight-card">
+                <h2>Team Goals</h2>
+                <p>
+                     Our goal is to create an efficient and reliable platform that connects sellers 
+                     with buyers while ensuring a smooth shopping experience. 
+                     The project will help us practice real-world skills in 
+                    <strong>web development, databases, and security</strong>.
+                </p>
+            </div>
+        </div>
+
+        <div class="highlight-card">
+            <h2>👥 Development Team</h2>
+            <table class="team-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Role</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>JABU</td>
+                        <td>SITHOLE</td>
+                        <td>RESEARCHER</td>
+                    </tr>
+                    <tr>
+                        <td>SDUDUZO</td>
+                        <td>BUTHELEZI</td>
+                        <td>BACKEND DEVELOPER</td>
+                    </tr>
+                    <tr>
+                        <td>APHIWE</td>
+                        <td>MNTAMBO</td>
+                        <td>BACKEND DEVELOPER</td>
+                    </tr>
+                    <tr>
+                        <td>NONOPHA</td>
+                        <td>BLAWENI</td>
+                        <td>TESTER</td>
+                    </tr>
+                    <tr>
+                        <td>R.KELLY</td>
+                        <td>SIWEYA</td>
+                        <td>FRONTEND DEVELOPER</td>
+                    </tr>
+                   <tr>
+                        <td>THABISO</td>
+                        <td>MKHONTO</td>
+                        <td>FRONTEND DEVELOPER</td>
+                    </tr>
+                
+                </tbody>
+            </table>
+        </div>
+
+        <div class="navigation">
+            <a href="index.html" class="nav-button">← Back to Portfolio</a>
+            <a href="dynamic.php" class="nav-button">View PHP Demo</a>
+            <a href="dynamic.jsp" class="nav-button">View JSP Demo</a>
+        </div>
+
+        <footer>
+            <p>&copy; @JABU SITHOLE</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create floating elements (same as main page)
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
+            
+            for (let i = 0; i < 12; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.top = Math.random() * 100 + 'vh';
+                element.style.width = Math.random() * 25 + 8 + 'px';
+                element.style.height = element.style.width;
+                element.style.background = colors[Math.floor(Math.random() * colors.length)];
+                element.style.animationDelay = Math.random() * 5 + 's';
+                element.style.opacity = Math.random() * 0.3 + 0.1;
+                container.appendChild(element);
+            }
+        }
+
+
+        // Add interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingElements();
+            updateDate();
+            
+            // Animate table rows on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.team-table tr').forEach((row, index) => {
+                row.style.opacity = '0';
+                row.style.transform = 'translateY(20px)';
+                row.style.transition = `all 0.5s ease ${index * 0.1}s`;
+                observer.observe(row);
+            });
+
+            // Animate cards on scroll
+            document.querySelectorAll('.highlight-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateX(-20px)';
+                card.style.transition = `all 0.6s ease ${index * 0.2}s`;
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
